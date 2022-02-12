@@ -3,6 +3,7 @@ import Router from 'vue-router'
 import Login from '@/components/Login'
 import Home from '@/components/Home'
 import CateMana from '@/components/CateMana'
+import UserMana from '@/components/UserMana'
 
 
 
@@ -20,6 +21,18 @@ export default new Router({
       name: '',
       component: Home,
       hidden: true
+    }, {
+      path: '/home',
+      component: Home,
+      name: '用户管理',
+      children: [
+        {
+          path: '/user',
+          iconCls: 'fa fa-user-o',
+          name: '用户管理',
+          component: UserMana
+        }
+      ]
     }, {
       path: '/home',
       component: Home,
