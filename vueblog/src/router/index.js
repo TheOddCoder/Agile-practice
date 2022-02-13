@@ -4,6 +4,7 @@ import Login from '@/components/Login'
 import Home from '@/components/Home'
 import CateMana from '@/components/CateMana'
 import UserMana from '@/components/UserMana'
+import DataCharts from '@/components/DataCharts'
 
 
 
@@ -43,6 +44,19 @@ export default new Router({
           iconCls: 'fa fa-reorder',
           name: '栏目管理',
           component: CateMana
+        }
+      ]
+    }, {
+      path: '/home',
+      component: Home,
+      name: '数据统计',
+      iconCls: 'fa fa-bar-chart',
+      children: [
+        {
+          path: '/charts',
+          iconCls: 'fa fa-bar-chart',
+          name: '数据统计',
+          component: DataCharts
         }
       ]
     }
