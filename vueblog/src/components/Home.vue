@@ -1,7 +1,7 @@
 <template>
   <el-container class="home_container">
     <el-header>
-      <div class="home_title">V部落博客管理平台</div>
+      <div class="home_title">博客管理平台</div>
       <div class="home_userinfoContainer">
         <el-dropdown @command="handleCommand">
   <span class="el-dropdown-link home_userinfo">
@@ -77,11 +77,11 @@
       }
     },
     mounted: function () {
-      this.$alert('本系统仅做演示使用!', '友情提示', {
-        confirmButtonText: '确定',
-        callback: action => {
-        }
-      });
+      // this.$alert('本系统仅做演示使用!', '友情提示', {
+      //   confirmButtonText: '确定',
+      //   callback: action => {
+      //   }
+      // });
       var _this = this;
       getRequest("/currentUserName").then(function (msg) {
         _this.currentUserName = msg.data;
