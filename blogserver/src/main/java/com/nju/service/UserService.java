@@ -1,18 +1,23 @@
 package com.nju.service;
 
+import com.nju.bean.Result;
 import com.nju.bean.Role;
 import com.nju.bean.User;
 import com.nju.mapper.RolesMapper;
 import com.nju.mapper.UserMapper;
+import com.nju.utils.FileUtil;
 import com.nju.utils.Util;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.multipart.MultipartFile;
 
+import java.io.IOException;
 import java.util.List;
 
 @Service
@@ -93,4 +98,37 @@ public class UserService implements UserDetailsService {
     public User getUserById(Long id) {
         return userMapper.getUserById(id);
     }
+
+
+    //一些端口信息
+    @Value("${server.port}")
+    private String port = "8081";
+
+    private static final String ip = "http://localhost";
+
+    private static final String static_root = "D:/devplatform_files";
+//    private static final String static_root = "/Users/mintao/Pictures";
+
+    //@Override
+    public Result uploadAvatar(String username, MultipartFile file) throws IOException {
+        //获取原文件的名称
+        String originalFilename = file.getOriginalFilename();
+//      String rootFilePath = System.getProperty("user.dir")+"/src/main/resources/files/"+originalFilename;
+        //获取到文件路径
+        String rootFilePath = static_root +"/avatar/"+ originalFilename;
+        //保存在文件中
+        FileUtil.writeBytes(file.getBytes(),rootFilePath);
+        //图片访问用到的url
+        String avatar = ip+":"+port+"/avatar/"+originalFilename;
+        try{
+            //头像信息存入数据库
+            userMapper.updateAvatar(avatar,username);
+            //自己封装的Result结果返回类
+            return Result.success(200,"上传成功",avatar);
+        }catch (Exception e){
+            System.out.println(e);
+            return Result.fail("上传失败");
+        }
+    }
+
 }
