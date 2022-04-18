@@ -1,8 +1,8 @@
 package com.nju.mapper;
 
+import com.nju.bean.Role;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
-import com.nju.bean.Role;
 
 import java.util.List;
 

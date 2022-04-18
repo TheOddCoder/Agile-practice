@@ -5,6 +5,12 @@ import Home from '@/components/Home'
 import CateMana from '@/components/CateMana'
 import UserMana from '@/components/UserMana'
 import DataCharts from '@/components/DataCharts'
+import ArticleList from '@/components/ArticleList'
+import PostArticle from '@/components/PostArticle'
+import BlogDetail from '@/components/BlogDetail'
+import UploadHeadTest from '@/components/UploadHeadTest'
+import TailoringTest from '@/components/TailoringTest'
+import PersonInfo from '@/components/PersonInfo'
 
 
 
@@ -18,10 +24,58 @@ export default new Router({
       hidden: true,
       component: Login
     }, {
+      path: '/uploadHead',
+      name: '头像上传',
+      hidden: true,
+      component: UploadHeadTest
+    }, {
+      path: '/tailoring',
+      name: '图片上传',
+      hidden: true,
+      component: TailoringTest
+    }, {
       path: '/home',
       name: '',
       component: Home,
       hidden: true
+    }, {
+      path: '/home',
+      component: Home,
+      name: '文章管理',
+      iconCls: 'fa fa-file-text-o',
+      children: [
+        {
+          path: '/articleList',
+          name: '文章列表',
+          component: ArticleList,
+          meta: {
+            keepAlive: true
+          }
+        }, {
+          path: '/postArticle',
+          name: '发表文章',
+          component: PostArticle,
+          meta: {
+            keepAlive: false
+          }
+        }, {
+          path: '/blogDetail',
+          name: '博客详情',
+          component: BlogDetail,
+          hidden: true,
+          meta: {
+            keepAlive: false
+          }
+        }, {
+          path: '/editBlog',
+          name: '编辑博客',
+          component: PostArticle,
+          hidden: true,
+          meta: {
+            keepAlive: false
+          }
+        }
+      ]
     }, {
       path: '/home',
       component: Home,
@@ -59,6 +113,18 @@ export default new Router({
           component: DataCharts
         }
       ]
-    }
+    }, {
+          path: '/home',
+          component: Home,
+          name: '个人信息',
+          hidden: true,
+          children: [
+              {
+                  path: '/personInfo',
+                  name: '个人信息',
+                  component: PersonInfo
+              }
+          ]
+      }
   ]
 })

@@ -1,9 +1,9 @@
 package com.nju.mapper;
 
-import org.apache.ibatis.annotations.Mapper;
-import org.apache.ibatis.annotations.Param;
 import com.nju.bean.Role;
 import com.nju.bean.User;
+import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
 
@@ -29,4 +29,10 @@ public interface UserMapper {
     int setUserRoles(@Param("rids") Long[] rids, @Param("id") Long id);
 
     User getUserById(@Param("id") Long id);
+
+    // 通过用户id获取头像
+    String getAvatarByUsername(String username);
+
+    // 设置用户头像
+    int updateAvatar(@Param("avatar") String avatar,@Param("username") String userName);
 }

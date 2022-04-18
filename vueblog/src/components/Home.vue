@@ -61,6 +61,7 @@
     methods: {
       handleCommand(command){
         var _this = this;
+        var userId = _this.$data.currentUserId;
         if (command == 'logout') {
           this.$confirm('注销登录吗?', '提示', {
             confirmButtonText: '确定',
@@ -73,6 +74,12 @@
           }, function () {
             //取消
           })
+        }
+        if (command == 'MyArticle') {
+            this.$router.push({path:'/articleList'})
+        }
+        if (command == 'MyHome'){
+            this.$router.push({path: '/personInfo', query: {userId: userId}})
         }
       }
     },
@@ -88,10 +95,16 @@
       }, function (msg) {
         _this.currentUserName = '游客';
       });
+        getRequest("/currentUserId").then(function (msg) {
+            _this.currentUserId = msg.data;
+        }, function (msg) {
+            _this.currentUserId = '7';
+        });
     },
     data(){
       return {
-        currentUserName: ''
+          currentUserName: '',
+          currentUserId: ''
       }
     }
   }

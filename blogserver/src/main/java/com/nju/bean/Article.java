@@ -1,7 +1,9 @@
 package com.nju.bean;
 
 import java.sql.Timestamp;
+import java.util.Arrays;
 import java.util.List;
+import java.util.Objects;
 
 public class Article {
     private Long id;
@@ -147,5 +149,42 @@ public class Article {
 
     public void setPageView(Integer pageView) {
         this.pageView = pageView;
+    }
+
+    @Override
+    public String toString() {
+        return "Article{" +
+                "id=" + id +
+                ", title='" + title + '\'' +
+                ", mdContent='" + mdContent + '\'' +
+                ", htmlContent='" + htmlContent + '\'' +
+                ", summary='" + summary + '\'' +
+                ", cid=" + cid +
+                ", uid=" + uid +
+                ", publishDate=" + publishDate +
+                ", state=" + state +
+                ", pageView=" + pageView +
+                ", editTime=" + editTime +
+                ", dynamicTags=" + Arrays.toString(dynamicTags) +
+                ", nickname='" + nickname + '\'' +
+                ", cateName='" + cateName + '\'' +
+                ", tags=" + tags +
+                ", stateStr='" + stateStr + '\'' +
+                '}';
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Article article = (Article) o;
+        return Objects.equals(id, article.id) && Objects.equals(title, article.title) && Objects.equals(mdContent, article.mdContent) && Objects.equals(htmlContent, article.htmlContent) && Objects.equals(summary, article.summary) && Objects.equals(cid, article.cid) && Objects.equals(uid, article.uid) && Objects.equals(publishDate, article.publishDate) && Objects.equals(state, article.state) && Objects.equals(pageView, article.pageView) && Objects.equals(editTime, article.editTime) && Arrays.equals(dynamicTags, article.dynamicTags) && Objects.equals(nickname, article.nickname) && Objects.equals(cateName, article.cateName) && Objects.equals(tags, article.tags) && Objects.equals(stateStr, article.stateStr);
+    }
+
+    @Override
+    public int hashCode() {
+        int result = Objects.hash(id, title, mdContent, htmlContent, summary, cid, uid, publishDate, state, pageView, editTime, nickname, cateName, tags, stateStr);
+        result = 31 * result + Arrays.hashCode(dynamicTags);
+        return result;
     }
 }

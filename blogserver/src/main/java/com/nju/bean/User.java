@@ -8,6 +8,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 public class User implements UserDetails {
     private Long id;
@@ -19,6 +20,61 @@ public class User implements UserDetails {
     private String email;
     private String userface;
     private Timestamp regTime;
+
+    private String birthday;
+    private Integer sex;
+    private String sign;
+    private String address;
+    private String tel;
+    private String dept;
+
+    public String getBirthday() {
+        return birthday;
+    }
+
+    public void setBirthday(String birthday) {
+        this.birthday = birthday;
+    }
+
+    public Integer getSex() {
+        return sex;
+    }
+
+    public void setSex(Integer sex) {
+        this.sex = sex;
+    }
+
+    public String getSign() {
+        return sign;
+    }
+
+    public void setSign(String sign) {
+        this.sign = sign;
+    }
+
+    public String getAddress() {
+        return address;
+    }
+
+    public void setAddress(String address) {
+        this.address = address;
+    }
+
+    public String getTel() {
+        return tel;
+    }
+
+    public void setTel(String tel) {
+        this.tel = tel;
+    }
+
+    public String getDept() {
+        return dept;
+    }
+
+    public void setDept(String dept) {
+        this.dept = dept;
+    }
 
     public Timestamp getRegTime() {
         return regTime;
@@ -120,5 +176,33 @@ public class User implements UserDetails {
 
     public void setNickname(String nickname) {
         this.nickname = nickname;
+    }
+
+    @Override
+    public String toString() {
+        return "User{" +
+                "id=" + id +
+                ", username='" + username + '\'' +
+                ", password='" + password + '\'' +
+                ", nickname='" + nickname + '\'' +
+                ", enabled=" + enabled +
+                ", roles=" + roles +
+                ", email='" + email + '\'' +
+                ", userface='" + userface + '\'' +
+                ", regTime=" + regTime +
+                '}';
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        User user = (User) o;
+        return enabled == user.enabled && Objects.equals(id, user.id) && Objects.equals(username, user.username) && Objects.equals(password, user.password) && Objects.equals(nickname, user.nickname) && Objects.equals(roles, user.roles) && Objects.equals(email, user.email) && Objects.equals(userface, user.userface) && Objects.equals(regTime, user.regTime);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, username, password, nickname, enabled, roles, email, userface, regTime);
     }
 }

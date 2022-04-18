@@ -2,8 +2,8 @@
 <!DOCTYPE mapper
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.nju.mapper.CategoryMapper">
-    <select id="getAllCategories" resultType="com.nju.bean.Category">
+<mapper namespace="com.com.nju.mapper.CategoryMapper">
+    <select id="getAllCategories" resultType="com.com.nju.bean.Category">
         SELECT * FROM category
     </select>
     <delete id="deleteCategoryByIds">
@@ -12,10 +12,10 @@
             #{id}
         </foreach>
     </delete>
-    <update id="updateCategoryById" parameterType="com.nju.bean.Category">
+    <update id="updateCategoryById" parameterType="com.com.nju.bean.Category">
         UPDATE category SET cateName=#{cateName} WHERE id=#{id}
     </update>
-    <insert id="addCategory" parameterType="com.nju.bean.Category">
+    <insert id="addCategory" parameterType="com.com.nju.bean.Category">
         INSERT INTO category SET date=#{date},cateName=#{cateName}
     </insert>
 </mapper>

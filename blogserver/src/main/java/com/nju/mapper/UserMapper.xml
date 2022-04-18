@@ -2,8 +2,8 @@
 <!DOCTYPE mapper
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.nju.mapper.UserMapper">
-    <select id="loadUserByUsername" resultType="com.nju.bean.User">
+<mapper namespace="com.com.nju.mapper.UserMapper">
+    <select id="loadUserByUsername" resultType="com.com.nju.bean.User">
         SELECT * FROM user WHERE username=#{username}
     </select>
     <insert id="reg" useGeneratedKeys="true" keyProperty="id">
@@ -28,7 +28,7 @@
         SELECT u.*,r.`id` AS rid,r.`name` AS rname FROM user u,roles r,roles_user ru WHERE u.`id`=ru.`uid` AND
         r.`id`=ru.`rid` AND u.`id`=#{id}
     </select>
-    <resultMap id="BaseResultMap" type="com.nju.bean.User">
+    <resultMap id="BaseResultMap" type="com.com.nju.bean.User">
         <id column="id" property="id"/>
         <result column="username" property="username"/>
         <result column="nickname" property="nickname"/>
@@ -37,12 +37,18 @@
         <result column="email" property="email"/>
         <result column="userface" property="userface"/>
         <result column="regTime" property="regTime"/>
-        <collection property="roles" ofType="com.nju.bean.Role">
+        <result column="birthday" property="birthday"/>
+        <result column="sex" property="sex"/>
+        <result column="sign" property="sign"/>
+        <result column="address" property="address"/>
+        <result column="tel" property="tel"/>
+        <result column="dept" property="dept"/>
+        <collection property="roles" ofType="com.com.nju.bean.Role">
             <id column="rid" property="id"/>
             <result column="rname" property="name"/>
         </collection>
     </resultMap>
-    <select id="getAllRole" resultType="com.nju.bean.Role">
+    <select id="getAllRole" resultType="com.com.nju.bean.Role">
         select * from roles;
     </select>
     <update id="updateUserEnabled">
@@ -60,4 +66,8 @@
             (#{rid},#{id})
         </foreach>
     </insert>
+
+    <update id="updateAvatar">
+        update user set userface = #{avatar} where username = #{username}
+    </update>
 </mapper>

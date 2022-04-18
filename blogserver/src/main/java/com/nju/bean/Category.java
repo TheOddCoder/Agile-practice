@@ -1,6 +1,7 @@
 package com.nju.bean;
 
 import java.sql.Timestamp;
+import java.util.Objects;
 
 public class Category {
     private Long id;
@@ -32,5 +33,27 @@ public class Category {
 
     public void setCateName(String cateName) {
         this.cateName = cateName;
+    }
+
+    @Override
+    public String toString() {
+        return "Category{" +
+                "id=" + id +
+                ", cateName='" + cateName + '\'' +
+                ", date=" + date +
+                '}';
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Category category = (Category) o;
+        return Objects.equals(id, category.id) && Objects.equals(cateName, category.cateName) && Objects.equals(date, category.date);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, cateName, date);
     }
 }
